@@ -1,4 +1,3 @@
-/* eslint-disable operator-assignment */
 function maxFrequencyFunc(letters) {
   let max = 1;
   const frequencyMap = new Map();
@@ -13,6 +12,7 @@ function maxFrequencyFunc(letters) {
   }
   return max;
 }
+
 function duplicateLetters(letters) {
   const maxFrequency = maxFrequencyFunc(letters);
   return maxFrequency > 1 ? maxFrequency : false;
