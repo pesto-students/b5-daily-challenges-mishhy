@@ -1,15 +1,14 @@
-// your implementation
 function checkObjCallback(obj, callbackfn, callBackCheck = true) {
   if (callBackCheck) {
     if (
-      typeof callbackfn !== "function" &&
-      Object.prototype.toString.call(callbackfn) !== "[object Function]"
+      typeof callbackfn !== 'function'
+      && Object.prototype.toString.call(callbackfn) !== '[object Function]'
     ) {
       throw new TypeError(`Expect function: Got ${typeof callbackfn}`);
     }
   }
   if (obj == null || obj.length === 0) {
-    throw new TypeError("Object is null or not defined");
+    throw new TypeError(`Object is ${obj}`);
   }
 }
 
@@ -58,4 +57,6 @@ const some = (obj, callbackfn) => {
   return filter(obj, callbackfn).length() > 0;
 };
 
-export { map, filter, invert, merge, all, some };
+export {
+  map, filter, invert, merge, all, some,
+};
