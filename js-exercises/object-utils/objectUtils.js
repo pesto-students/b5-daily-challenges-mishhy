@@ -7,7 +7,7 @@ function checkObjCallback(obj, callbackfn, callBackCheck = true) {
       throw new TypeError(`Expect function: Got ${typeof callbackfn}`);
     }
   }
-  if (obj == null || obj.length === 0) {
+  if (obj === null || obj === undefined || Object.keys(obj).length === 0) {
     throw new TypeError(`Object is ${obj}`);
   }
 }
@@ -49,12 +49,13 @@ const merge = (...objects) => {
 
 const all = (obj, callbackfn) => {
   checkObjCallback(obj, callbackfn);
-  return filter(obj, callbackfn).length() === obj.length();
+  const passedLength = Object.keys(filter(obj, callbackfn)).length;
+  return passedLength === Object.keys(obj).length;
 };
 
 const some = (obj, callbackfn) => {
   checkObjCallback(obj, callbackfn);
-  return filter(obj, callbackfn).length() > 0;
+  return Object.keys(filter(obj, callbackfn)).length > 0;
 };
 
 export {

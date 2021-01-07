@@ -9,7 +9,7 @@ describe('Object Utils Test Cases', () => {
     ).toEqual({ A: 10, B: 20 });
   });
   it('filter check', () => {
-    expect(filter({ a: 12, b: 2 }, ([, val]) => val > 5)).toEqual({ a: 12 });
+    expect(filter({ a: 12, b: 2, c: 1 }, ([, val]) => val > 5)).toEqual({ a: 12 });
   });
 
   it('invert check', () => {
@@ -18,11 +18,12 @@ describe('Object Utils Test Cases', () => {
 
   it('merge check', () => {
     expect(merge({ a: 12 }, { b: 2 }, { c: 3 })).toEqual({ c: 3, a: 12, b: 2 });
+    expect(() => merge({})).toThrow();
   });
 
   it('all check', () => {
     expect(all({ a: 12, b: 2 }, ([, val]) => val > 5)).toEqual(false);
-    expect(all({ a: 12, b: 2 }, ([, val]) => val > 5)).toEqual(true);
+    expect(all({ a: 12, b: 22 }, ([, val]) => val > 5)).toEqual(true);
   });
 
   it('some check', () => {
@@ -34,7 +35,6 @@ describe('Object Utils Test Cases', () => {
     expect(() => map({}, ([key, val]) => [key.toUpperCase(), val * 10])).toThrow();
     expect(() => filter({}, ([, val]) => val > 10)).toThrow();
     expect(() => invert({})).toThrow();
-    expect(() => merge({})).toThrow();
     expect(() => all({}, ([, val]) => val > 10)).toThrow();
     expect(() => some({}, ([, val]) => val > 10)).toThrow();
   });
