@@ -1,6 +1,6 @@
 const deepCopyObject = objToCopy => {
   if (typeof objToCopy !== 'object' || objToCopy === null) {
-    return objToCopy; // Return the value if inObject is not an object
+    return objToCopy; // Return the value if objToCopy is not an object
   }
 
   // Create an array or object to hold the values
@@ -10,7 +10,7 @@ const deepCopyObject = objToCopy => {
     if ({}.hasOwnProperty.call(objToCopy, key)) {
       const value = objToCopy[key];
 
-      // Recursively deepcopy for nested objects, including arrays
+      // Recursive deepcopy for nested objects, arrays
       outObject[key] = deepCopyObject(value);
     }
   }
