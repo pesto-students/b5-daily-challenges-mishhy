@@ -22,7 +22,7 @@ describe('Object Utils Test Cases', () => {
 
   it('all check', () => {
     expect(all({ a: 12, b: 2 }, ([, val]) => val > 5)).toEqual(false);
-    expect(all({ a: 12, b: 2 }, ([, val]) => val > 5)).toEqual(true);
+    expect(all({ a: 12, b: 22 }, ([, val]) => val > 5)).toEqual(true);
   });
 
   it('some check', () => {
