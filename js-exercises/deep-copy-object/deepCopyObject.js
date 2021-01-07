@@ -6,13 +6,17 @@ const deepCopyObject = objToCopy => {
   // Create an array or object to hold the values
   const outObject = Array.isArray(objToCopy) ? [] : {};
 
-  for (const key in objToCopy) {
-    if ({}.hasOwnProperty.call(objToCopy, key)) {
-      const value = objToCopy[key];
+  for (const key of Object.getOwnPropertyNames(objToCopy)) {
+    const value = objToCopy[key];
+    // Recursive deepcopy for nested objects, arrays
+    outObject[key] = deepCopyObject(value);
+  }
 
-      // Recursive deepcopy for nested objects, arrays
-      outObject[key] = deepCopyObject(value);
-    }
+  // copying symbols too
+  for (const key of Object.getOwnPropertySymbols(objToCopy)) {
+    const value = objToCopy[key];
+    // Recursive deepcopy for nested objects, arrays
+    outObject[key] = deepCopyObject(value);
   }
 
   return outObject;
