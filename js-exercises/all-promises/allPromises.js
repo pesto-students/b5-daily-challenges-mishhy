@@ -8,14 +8,14 @@ const convertIntoPromise = promise => {
 const allPromises = promises => {
   const resolveArray = [];
   let resultPromise = Promise.resolve();
-  const resolveThen = (val) => {
+  const resolveThen = val => {
     resolveArray.push(val);
     return resolveArray;
   };
   if (promises) {
     for (const promise of promises) {
       resultPromise = resultPromise
-        .then((() => convertIntoPromise(promise).then((val) => resolveThen(val))));
+        .then((() => convertIntoPromise(promise).then(resolveThen)));
     }
   }
   return resultPromise;
