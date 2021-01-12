@@ -22,7 +22,7 @@ test('promise chain value passing', async () => Promise.resolve()
     expect(value).toEqual('test');
   }));
 
-test('promise chain sleeping check', async () => {
+test('promise chain sleeping', async () => {
   const start = performance.now();
   return Promise.resolve()
     .then(sleep(20))

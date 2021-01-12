@@ -9,6 +9,7 @@ const sleep = ms => {
   const customPromise = val => promise.then(() => val);
 
   // define its own then and catch method
+  // since normally it wouldn't passing chain sleeping
   customPromise.then = (...args) => promise.then(...args);
   customPromise.catch = Promise.resolve().catch;
 
