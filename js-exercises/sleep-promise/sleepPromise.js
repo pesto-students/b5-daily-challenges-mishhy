@@ -1,4 +1,7 @@
 const sleep = ms => {
+  if (Number.isNaN(ms)) {
+    throw new ReferenceError(`Expected Number: Got ${typeof ms}`);
+  }
   if (ms < 0) {
     throw new RangeError(`${ms}ms!!! You are not in time machine, you can't go back :)`);
   }
