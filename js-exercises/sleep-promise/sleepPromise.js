@@ -8,7 +8,7 @@ const sleep = ms => {
 
   const promise = new Promise((resolve) => setTimeout(resolve, ms));
 
-  // new function object
+  // new functional object
   const customPromise = val => promise.then(() => val);
 
   // define its own then and catch method
