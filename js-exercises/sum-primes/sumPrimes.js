@@ -1,9 +1,11 @@
+const isNumber = number => !(number === undefined
+  || Number.isNaN(number)
+  || !Number.isFinite(number)
+  || number % 1
+  || number < 2);
+
 const isPrime = number => {
-  if (number === undefined
-    || Number.isNaN(number)
-    || !Number.isFinite(number)
-    || number % 1
-    || number < 2) {
+  if (!isNumber(number)) {
     return false;
   }
 
@@ -12,9 +14,11 @@ const isPrime = number => {
   }
 
   const sqrt = Math.sqrt(number);
-  if (parseInt(sqrt, 10) === number) {
+  // if sqaure root is an integer then it is not a prime number
+  if (parseInt(sqrt, 10) === sqrt) {
     return false;
   }
+
   for (let i = 3; i <= parseInt(sqrt, 10); i += 2) {
     if (number % i === 0) {
       return false;
@@ -35,6 +39,9 @@ const getNextPrime = function* () {
 };
 
 function sumPrimes(primeUpto) {
+  if (!isNumber(primeUpto)) {
+    throw new TypeError(`${primeUpto} is not an number`);
+  }
   const prime = getNextPrime();
   let nextPrime = prime.next().value;
   let sumPrime = 0;
