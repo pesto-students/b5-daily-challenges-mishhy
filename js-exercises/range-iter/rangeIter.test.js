@@ -31,8 +31,8 @@ describe('rangeIter', () => {
       expect(() => rangeIter(2)).toThrowError(TypeError, /undefined is not a number/);
     });
 
-    // it('throws an exception when is not passed number as second parameter', () => {
-    //   expect(() => rangeIter(2, 'a')).toThrowError(TypeError, /a is not a number/);
-    // });
+    it('throws an exception when is not passed number as second parameter', () => {
+      expect(() => rangeIter(2, 'a')).toThrowError(TypeError, /a is not a number/);
+    });
   });
 });

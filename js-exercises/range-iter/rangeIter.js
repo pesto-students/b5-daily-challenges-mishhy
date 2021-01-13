@@ -1,12 +1,16 @@
-function checkNaNThrow(num) {
-  if (num === undefined || Number.isNaN(num)) {
-    throw new TypeError(`${num} is not a number`);
-  }
-}
+const isNumber = number => !(number === undefined
+    || Number.isNaN(number)
+    || !Number.isFinite(number));
+
+const throwError = num => `${num} is not a number`;
 
 function rangeIter(lb, ub, step = 1) {
-  checkNaNThrow(lb);
-  checkNaNThrow(ub);
+  if (!isNumber(lb)) {
+    throw new TypeError(throwError(lb));
+  }
+  if (!isNumber(ub)) {
+    throw new TypeError(throwError(ub));
+  }
   const iterable = {};
 
   iterable[Symbol.iterator] = function* () {
