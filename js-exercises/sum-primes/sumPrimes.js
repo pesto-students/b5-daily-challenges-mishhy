@@ -25,7 +25,7 @@ const isPrime = number => {
   const sqrt = Math.sqrt(number);
 
   // if sqaure root is an integer then it is not a prime number
-  if (parseInt(sqrt, 10) === sqrt) {
+  if (!sqrt % 1) {
     return false;
   }
 
