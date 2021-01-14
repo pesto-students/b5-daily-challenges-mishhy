@@ -1,0 +1,58 @@
+const isNumber = number => {
+  if (number === undefined
+      || Number.isNaN(number)
+      || !Number.isFinite(number)) {
+    throw new TypeError(`Expected number but found ${typeof input}`);
+  }
+};
+
+const getNextPrime = function* () {
+  yield 2;
+  let nextNumber = 3;
+  const step = 2;
+  while (true) {
+    if (isPrime(nextNumber)) {
+      yield nextNumber;
+    }
+    nextNumber += step;
+  }
+};
+
+const isPrime = number => {
+  if (number < 4) {
+    return (number === 2 || number === 3);
+  }
+
+  const sqrt = Math.sqrt(number);
+
+  // if sqaure root is an integer then it is not a prime number
+  if (!sqrt % 1) {
+    return false;
+  }
+
+  for (const nextNumber of getNextPrime(sqrt)) {
+    if (number % nextNumber === 0) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+function* primeUpto(upto) {
+  for (const prime of getNextPrime()) {
+    if (upto--) {
+      yield prime;
+    }
+  }
+}
+
+
+function sumPrimes(primeUpto) {
+  return [...primeUpto(primeUpto)]
+    .reduce((sum, el) => sum + el, 0);
+}
+
+export {
+  sumPrimes,
+};
