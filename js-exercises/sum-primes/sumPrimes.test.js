@@ -10,7 +10,7 @@ describe('sumPrimes', () => {
     expect(sumPrimes(1)).toBe(0);
     expect(sumPrimes(10)).toBe(17);
     expect(sumPrimes(977)).toBe(73156);
-    expect(sumPrimes(9777)).toBe(5499476);
+    expect(sumPrimes(977777)).toBe(5499476);
   });
   describe('bad arguments', () => {
     it('throws an exception when it is not passed any parameter', () => {

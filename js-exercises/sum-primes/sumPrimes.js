@@ -6,14 +6,11 @@ const isNumber = number => {
   }
 };
 
-const getNextPrime = function* (primeUpto) {
-  isNumber(primeUpto);
-  if (primeUpto >= 2) {
-    yield 2;
-  }
+const getNextPrime = function* () {
+  yield 2;
   let nextNumber = 3;
   const step = 2;
-  while (nextNumber <= primeUpto) {
+  while (true) {
     if (isPrime(nextNumber)) {
       yield nextNumber;
     }
@@ -42,8 +39,17 @@ const isPrime = number => {
   return true;
 };
 
+function* primeUpto(upto) {
+  for (const prime of getNextPrime()) {
+    if (upto--) {
+      yield prime;
+    }
+  }
+}
+
+
 function sumPrimes(primeUpto) {
-  return [...getNextPrime(primeUpto)]
+  return [...primeUpto(primeUpto)]
     .reduce((sum, el) => sum + el, 0);
 }
 
