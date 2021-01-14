@@ -8,12 +8,16 @@ const isNumber = number => {
 
 const getNextPrime = function* (primeUpto) {
   isNumber(primeUpto);
-  let nextNumber = 2;
+  if (primeUpto >= 2) {
+    yield 2;
+  }
+  let nextNumber = 3;
+  const step = 2;
   while (nextNumber <= primeUpto) {
     if (isPrime(nextNumber)) {
       yield nextNumber;
     }
-    nextNumber += 1;
+    nextNumber += step;
   }
 };
 
