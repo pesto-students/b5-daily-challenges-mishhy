@@ -2,19 +2,22 @@ const isNumber = number => {
   if (number === undefined
     || Number.isNaN(number)
     || !Number.isFinite(number)) {
-    throw new TypeError(`Expected number but found ${typeof input}`);
+    throw new TypeError(`${number} is not a number`);
   }
 };
 
 // simpler code
-function* rangeIter(lb, ub, step = 1) {
-  isNumber(lb);
-  isNumber(ub);
-  let el = lb;
-  while (el <= ub) {
+function* range(from, to, step = 1) {
+  isNumber(from);
+  isNumber(to);
+  let el = from;
+  while (el <= to) {
     yield el;
     el += step;
   }
+}
+function rangeIter(from, to, step = 1) {
+  return [...range(from, to, step)];
 }
 // as per class
 // function rangeIter(from, to, step = 1) {

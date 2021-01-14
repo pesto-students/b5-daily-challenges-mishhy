@@ -39,7 +39,8 @@ const isPrime = number => {
 };
 
 function sumPrimes(primeUpto) {
-  return [...getNextPrime(primeUpto)].reduce((sum, el) => sum + el, 0);
+  return [...getNextPrime(primeUpto)]
+    .reduce((sum, el) => sum + el, 0);
 }
 
 export {
