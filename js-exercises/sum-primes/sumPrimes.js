@@ -1,36 +1,15 @@
-const isNumber = number => !(number === undefined
-  || Number.isNaN(number)
-  || !Number.isFinite(number)
-  || number % 1
-  || number < 2);
-
-const isPrime = number => {
-  if (!isNumber(number)) {
-    return false;
+const isNumber = number => {
+  if (number === undefined
+      || Number.isNaN(number)
+      || !Number.isFinite(number)) {
+    throw new TypeError(`Expected number but found ${typeof input}`);
   }
-
-  if (number % 2 === 0) {
-    return (number === 2);
-  }
-
-  const sqrt = Math.sqrt(number);
-  // if sqaure root is an integer then it is not a prime number
-  if (parseInt(sqrt, 10) === sqrt) {
-    return false;
-  }
-
-  for (let i = 3; i <= parseInt(sqrt, 10); i += 2) {
-    if (number % i === 0) {
-      return false;
-    }
-  }
-
-  return true;
 };
 
-const getNextPrime = function* () {
+const getNextPrime = function* (primeUpto) {
+  isNumber(primeUpto);
   let nextNumber = 2;
-  while (true) {
+  while (nextNumber <= primeUpto) {
     if (isPrime(nextNumber)) {
       yield nextNumber;
     }
@@ -38,18 +17,29 @@ const getNextPrime = function* () {
   }
 };
 
+const isPrime = number => {
+  if (number < 4) {
+    return (number === 2 || number === 3);
+  }
+
+  const sqrt = Math.sqrt(number);
+
+  // if sqaure root is an integer then it is not a prime number
+  if (parseInt(sqrt, 10) === sqrt) {
+    return false;
+  }
+
+  for (const nextNumber of getNextPrime(sqrt)) {
+    if (number % nextNumber === 0) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 function sumPrimes(primeUpto) {
-  if (!isNumber(primeUpto)) {
-    throw new TypeError(`${primeUpto} is not an number`);
-  }
-  const prime = getNextPrime();
-  let nextPrime = prime.next().value;
-  let sumPrime = 0;
-  while (nextPrime <= primeUpto) {
-    sumPrime += nextPrime;
-    nextPrime = prime.next().value;
-  }
-  return sumPrime;
+  return [...getNextPrime(primeUpto)].reduce((sum, el) => sum + el, 0);
 }
 
 export {
