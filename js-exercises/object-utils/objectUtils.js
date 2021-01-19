@@ -12,26 +12,21 @@ function checkObjCallback(obj, callbackfn, callBackCheck = true) {
   }
 }
 
-const map = (obj, callbackfn) => {
-  checkObjCallback(obj, callbackfn);
-  const result = {};
-  for (const key of Object.keys(obj)) {
-    const [newKey, newVal] = callbackfn([key, obj[key]]);
-    result[newKey] = newVal;
-  }
-  return result;
-};
+function compose(...fns) {
+  return (initialValue) => fns.reduce((acc, fn) => fn(acc), initialValue);
+}
 
-const filter = (obj, callbackfn) => {
-  checkObjCallback(obj, callbackfn);
-  const result = {};
-  for (const key of Object.keys(obj)) {
-    if (callbackfn([key, obj[key]])) {
-      result[key] = obj[key];
-    }
-  }
-  return result;
-};
+const map = (obj, callbackfn) => compose(
+  Object.entries,
+  (array) => array.map(callbackfn),
+  Object.fromEntries,
+)(obj);
+
+const filter = (obj, callbackfn) => compose(
+  Object.entries,
+  (array) => array.filter(callbackfn),
+  Object.fromEntries,
+)(obj);
 
 const invert = (obj) => {
   checkObjCallback(obj, null, false);
